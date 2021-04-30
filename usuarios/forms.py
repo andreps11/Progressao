@@ -1,0 +1,26 @@
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
+
+NIVEL_CHOICES = (
+    ("Vendedor", "Vendedor"),
+    ("Escola", "Escola"),
+)
+
+class UsuarioForm(UserCreationForm):
+    email = forms.EmailField(max_length=100)
+
+    nivel = forms.ChoiceField(choices=NIVEL_CHOICES)
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1',
+                  'password2', 'nivel']
+    
+    def clean_email(self):
+        e = self.cleaned_data['email']
+        if User.objects.filter(email=e).exists():
+            raise ValidationError("O email {} já está em uso.".format(e))
+
+        return e

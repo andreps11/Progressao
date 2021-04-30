@@ -1,0 +1,34 @@
+{% extends 'paginas/modelo.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>Pré-Projeto</title>
+{% endblock %}
+
+{% block conteudo %}
+<section class="content">
+    <div class="">
+        <h3>Perfil</h3>
+        <p class="lead">
+            asddasdfsdfdfdsfd.
+        </p>
+
+        <hr>
+
+        {{ user.perfil.nome_completo }}
+        <hr>
+        {{ user.perfil.cpf }}
+        <hr>
+        {{ user.perfil.telefone }}
+        <hr>
+        {{ user.perfil.usuario }}
+
+        <hr>
+
+        <a href="{% url 'atualizar-dados' %}" class="btn btn-default btn-flat">Editar meus dados</a>
+        
+    </div>
+</section>
+{% endblock %}
+
